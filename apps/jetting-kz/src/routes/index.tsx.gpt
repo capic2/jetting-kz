@@ -1,0 +1,111 @@
+import { createFileRoute } from '@tanstack/react-router';
+import {
+  Button,
+  FieldError,
+  Form,
+  Input,
+  Label,
+  TextField,
+} from 'react-aria-components';
+import { parseZodResult } from '@jetting-kz/http-client';
+import ky from 'ky';
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { weatherSchema } from '../zod/schemas/weather';
+import { useAppContext } from '../context/AppContext';
+import { FormEvent, useState } from 'react';
+import OpenAI from 'openai';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+
+const url =
+  'https://api.openweathermap.org/data/2.5/weather?lat=47.65723784639425&lon=6.103564997998783&units=metric&appid=ffa16b4548f5d50aff32e85fc2867d9b';
+
+const weatherQueryOptions = () =>
+  queryOptions({
+    queryKey: ['weatherQuery'],
+    queryFn: () =>
+      parseZodResult({ kyMethod: () => ky.get(url), schema: weatherSchema }),
+  });
+
+export const Route = createFileRoute('/')({
+  component: IndexComponent,
+  loader: async ({ context: { queryClient } }) =>
+    queryClient.ensureQueryData(weatherQueryOptions()),
+});
+
+function IndexComponent() {
+  const { data: weatherData } = useSuspenseQuery(weatherQueryOptions());
+  const { openAI } = useAppContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{ temperature: number; pressure: number; humidity: number }>();
+  const [response, setResponse] = useState<string>('');
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    if (!openAI) {
+      throw new Error('OpenAI is not defined');
+    }
+
+    const prompt = `
+    Tu es un expert en réglage de carburateurs pour moteurs de karting, spécialisé dans les moteurs TM R1.
+    Ta tâche est de recommander une taille de gicleur en fonction de la température, de la pression atmosphérique et du taux d'humidité.
+    Utilise les valeurs de référence suivantes pour estimer la taille du gicleur :
+
+    - 20°C, 1013 hPa, 50% humidité → Gicleur 175
+    - 25°C, 1013 hPa, 50% humidité → Gicleur 172
+    - 30°C, 1013 hPa, 50% humidité → Gicleur 170
+    - 20°C, 990 hPa, 50% humidité → Gicleur 178
+    - 25°C, 990 hPa, 50% humidité → Gicleur 175
+    - 30°C, 990 hPa, 50% humidité → Gicleur 172
+
+    Si la température est plus élevée, réduis légèrement la taille du gicleur.
+    Si la pression atmosphérique est plus basse, augmente la taille du gicleur.
+    Si l'humidité est très élevée (> 70%), enrichis légèrement le mélange.
+
+    Donne uniquement la taille du gicleur recommandée, sans explication.
+
+    Conditions actuelles :
+    - Température : ${data.temperature}°C
+    - Pression : ${data.pressure} hPa
+    - Humidité : ${data.humidity}%
+
+    Quel gicleur recommandes-tu ?
+  `;
+
+    console.log('envoi de la requête à OpenAI');
+    const response = openAI.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'system', content: prompt }],
+      temperature: 0.3, // Garder une réponse stable
+    });
+
+    setResponse(response.data.choices[0].message.content);
+  };
+
+  return (
+    <>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <TextField name="temperature">
+          <Label htmlFor="temperature">Température</Label>
+          <Input value={weatherData?.main.temp} {...register('temperature')} />
+          <FieldError>Erreur</FieldError>
+        </TextField>
+        <TextField name="pressure">
+          <Label htmlFor="pressure">Pression atmosphérique</Label>
+          <Input value={weatherData?.main.pressure} {...register('pressure')} />
+          <FieldError>Erreur</FieldError>
+        </TextField>
+        <TextField name="humidity">
+          <Label htmlFor="humidity">Humidité</Label>
+          <Input value={weatherData?.main.humidity} {...register('humidity')} />
+          <FieldError>Erreur</FieldError>
+        </TextField>
+
+        <Button type="submit">Submit</Button>
+      </Form>
+
+      {response && <p>{response}</p>}
+    </>
+  );
+}
