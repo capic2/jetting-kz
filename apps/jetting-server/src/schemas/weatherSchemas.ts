@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const weatherSchema = z.object({
+const weatherConditionsSchema = z.object({
   coord: z.object({
     lon: z.number(),
     lat: z.number(),
@@ -44,6 +44,6 @@ const weatherSchema = z.object({
   cod: z.number(),
 });
 
-type Weather = z.infer<typeof weatherSchema>;
+type WeatherConditions = z.infer<typeof weatherConditionsSchema>;
 
-export { weatherSchema, Weather };
+export { weatherConditionsSchema, WeatherConditions };

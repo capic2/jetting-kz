@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "strictNullChecks": true,
     "emitDecoratorMetadata": true,
-    "outDir": ""
+    "outDir": "",
+    "resolveJsonModule": true
   },
   "exclude": [
     "src/**/*.spec.ts",
@@ -21,7 +23,9 @@
     "src/**/*.stories.tsx",
     "src/**/*.stories.mdx",
     ".storybook/*.js",
-    ".storybook/*.ts"
+    ".storybook/*.jsx",
+    ".storybook/*.ts",
+    ".storybook/*.tsx"
   ],
   "files": [
     "../../node_modules/@nx/react/typings/styled-jsx.d.ts",

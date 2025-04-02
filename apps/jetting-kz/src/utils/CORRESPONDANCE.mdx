@@ -1,0 +1,75 @@
+Result page => p141t4/c2252f
+  - Propriétés
+    - Objet contenant les résultats du calcul => p154v4/C2333c
+    - Objet contenant le fine tuning => p154v4/C2336f
+    - Object contenant les conditions météorologiques => p154v4/C2340j
+  - Fonctions
+    - m4495m0 => semble être les valeurs par défaut de la configuration moteur => correspond à p161w4/C2392a
+    - m4496n0 => semble être l'affectation des valeurs computed à la vue
+
+
+Fonctions utils ? => p182z4/C2516f
+  - m4733a => permet de spécifier le nombre de chiffres après la virgule
+
+
+Information de settings moteur => p154v4/C2335e
+
+p154v4.C2338h => contient la liste des 12 configurations possibles
+c2334d3.f9036s = "3";                                     => name = "3"
+c2334d3.f9034q = 78.435f;                                 => mainJetA = 78.435
+c2334d3.f9035r = 77.928f;                                 => mainJetB = 77.928
+c2334d3.f9039v = 0.0f;                                    => needleTypeA = 0
+c2334d3.f9040w = 1.0f;                                    => needleTypeB = 1
+C2335e.h hVar = C2335e.h.f9120n;                          => (K21, 11) avec K21 l'aiguille
+C2335e.h hVar2 = C2335e.h.f9119m;                         => (k22, 10) avec K22 l'aiguille
+C2335e.h hVar3 = C2335e.h.f9112f;                         => (K23, 3) avec K23 l'aiguille
+c2334d3.f9043z = new C2335e.h[]{hVar, hVar2, hVar3};      => needleTypeB = [(K21, 11), (k22, 10), (K23, 3)]
+c2334d3.f9037t = 9.328f;                                  => needleClipA = 9.328
+c2334d3.f9038u = -8.6103f;                                => needleClipB = -8.6103
+c2334d3.f9018a = 16.486f;                                 => emulsionTubeA = 16.486
+c2334d3.f9019b = 249.72f;                                 => emulsionTubeB = 249.75
+C2335e.b bVar = C2335e.b.f9072c;                          => ("DQ", 0) avec DQ l'émulsion tube
+c2334d3.f9020c = bVar;                                    => emulsionTubeType = ("DQ", 0)
+c2334d3.f9021d = 35.616f;                                 => iddleDiffuserA = 35.616
+c2334d3.f9022e = 8.0f;                                    => iddleDiffuserB = 8
+C2335e.f fVar = C2335e.f.f9103c;                          => ("B", 0) avec B l'iddle diffuser
+c2334d3.f9023f = fVar;                                    => iddleDiffuserType = ("B", 0)
+c2334d3.f9024g = 0.0f;                                    => iddleJetA = 0
+c2334d3.f9025h = 60.0f;                                   => iddleJetB = 60
+c2334d3.f9041x = 1.5f;                                    => ? = 1.5
+c2334d3.f9042y = 50.0f;                                   => ? = 50
+
+**
+ * **** Moteur
+ * type de moteur: k9
+ * bougie: NGK EG
+ * type de tube d'émulsion: DP
+ * Les chars: 1 x 9gr
+ * Hauteur du flotteur: 11
+ * Conduit entrée boite à air: 30mm
+ * demi pas pour l'aiguille: true
+ * rapport mélange huilre 4.0%
+ * type carburant: 98 RON
+ * type piste: lignes droites moyennes
+ * mélange qualité: air/fuel ration
+ *
+ * *** Meteo
+ * temperature: 20.0 °C
+ * pressure: 1013.0 hPa
+ * humidity: 50.0 %
+ * altitude: 0.0 m
+ *
+ * | N° |   gicleur    | aiguille | position aiguille | soupapape etranglement | tube emulsion | position de la vis pneumatique | gicleur ralenti | bougie     | emulsifiant inactif |
+ * | 1  | 170 (169.35) | k28      | P2.0              | 50                     | DP267         | 1 + 1/2                        | 60              | NGK BR11EG | B49                 |
+ * | 2  | 172 (171.71) | k98      | P2.5              | 50                     | DP267         | 1 + 1/2                        | 60              | NGK BR11EG | B50                 |
+ * | 3  | 172 (171.09) | k22      | P2.5              | 50                     | DP267         | 1 + 1/2                        | 60              | NGK BR11EG | B50                 |
+ * | 4  | 168 (168.83) | k23      | P2.0              | 50                     | DP266         | 1 + 1/2                        | 60              | NGK BR11EG | B49                 |
+ * | 5  | 142 (142.67) | k8       | P3.0              | 50                     | DP265         | 1 + 3/4                        | 61              | NGK BR11EG | CD1                 |
+ * | 6  | 140 (139.60) | k3       | P3.0              | 50                     | DP264         | 1 + 1/2                        | 61              | NGK BR11EG | B70                 |
+ * | 7  | 142 (142.84) | k93      | P2.5              | 50                     | DP264         | 1 + 3/4                        | 61              | NGK BR11EG | CD1                 |
+ * | 8  | 165 (164.60) | k96      | P2.0              | 50                     | DP265         | 1 + 3/4                        | 60              | NGK BR11EG | B51                 |
+ * | 9  | 142 (142.48) | U7       | P2.0              | 50                     | DP263         | 1 + 3/4                        | 60              | NGK BR11EG | B42                 |
+ * | 10 | 145 (143.87) | U2       | P2.0              | 55                     | DP263         | 2                              | 60              | NGK BR11EG | CD1                 |
+ * | 11 | 140 (139.54) | U12      | P2.5              | 55                     | DP263         | 2                              | 68              | NGK BR11EG | B100                |
+ * | 12 | 140 (140.17) | U3       | P1.5              | 55                     | DP263         | 2                              | 61              | NGK BR11EG | CD1                 |
+ */

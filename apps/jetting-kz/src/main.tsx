@@ -39,9 +39,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <IntlProvider locale="fr" messages={frMessages}>
+      <IntlProvider
+        locale="fr"
+        messages={frMessages}
+      >
         {/*<AppContextProvider openAI={openAI}>*/}
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
         {/*</AppContextProvider>*/}
       </IntlProvider>
     </QueryClientProvider>

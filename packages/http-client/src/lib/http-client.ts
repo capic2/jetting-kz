@@ -1,18 +1,20 @@
 import { ResponsePromise } from 'ky';
+
+import { CancelableRequest, Response } from 'got';
 import { z } from 'zod';
 
 export const parseZodResult = async <
-  TDataPromise extends () => ResponsePromise,
+  TDataPromise extends
+    | (() => ResponsePromise)
+    | (() => CancelableRequest<Response>),
   TSchema extends z.ZodType
 >({
-    kyMethod,
-    schema,
-  }: {
-  kyMethod: TDataPromise;
+  method,
+  schema,
+}: {
+  method: TDataPromise;
   schema: TSchema;
 }): Promise<z.infer<TSchema>> => {
-  const response = await kyMethod();
-  const data = await response.json();
-
+  const data = await method().json();
   return schema.parse(data);
 };

@@ -1,1 +1,26 @@
-{}
+{
+  "settings.carburator": "Carburateur",
+  "settings.carburator.float": "Flotteur",
+  "settings.carburator.floatHeight": "Hauteur du flotteur",
+  "settings.carburator.fuelOilPercent": "Essence/Huile",
+  "settings.carburator.needleSemiStep": "Demi pas pour l'aiguille",
+  "settings.engine": "Moteur",
+  "settings.engine.emulsionType": "Type d'émulsion",
+  "settings.engine.emulsionType.placholder": "Selectionnez un type d'émulsion",
+  "settings.engine.sparkle": "Bougie",
+  "settings.engine.type": "Type",
+  "settings.engine.type.placeholder": "Selectionnez un type",
+  "settings.engine.sparkle.placeholder": "Selectionnez une bougie",
+  "settings.carburator.float.placeholder": "Selectionnez un flotteur",
+  "settings.carburator.floatHeight.placeholder": "Selectionnez une hauteur de flotteur",
+  "settings.fuel": "Carburant",
+  "settings.fuel.type": "Type de carburant",
+  "settings.fuel.type.placeholder": "Selectionnez un type de carburant",
+  "settings.title": "Paramètres",
+  "settings.track": "Piste",
+  "settings.track.type": "Type",
+  "settings.track.type.placeholder": "Selectionnez un type",
+  "settings.track.type.sprintMedium": "Ligne droite moyenne",
+  "settings.track.type.sprintLongStraight": "Ligne droite longue",
+  "settings.track.type.sprintShortStraight": "Ligne droite courte"
+}

@@ -1,6 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "strictNullChecks": true,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -15,6 +18,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@jetting-kz/common": ["packages/common/src/index.ts"],
       "@jetting-kz/components": ["packages/components/src/index.ts"],
       "@jetting-kz/http-client": ["packages/http-client/src/index.ts"]
     }

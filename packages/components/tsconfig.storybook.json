@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "strictNullChecks": true,
     "emitDecoratorMetadata": true,
-    "outDir": ""
+    "outDir": "",
+    "resolveJsonModule": true
   },
   "exclude": [
     "src/**/*.spec.ts",
